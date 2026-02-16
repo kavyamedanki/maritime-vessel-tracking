@@ -4,11 +4,13 @@ import { useNavigate, Link } from "react-router-dom";
 
 function Register() {
   const [formData, setFormData] = useState({
-    fullname: "",
     username: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    password_confirm: "",
+    role: "",
+    company: "",
+    phone: ""
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -48,9 +50,16 @@ function Register() {
   };
 
   const handleChange = (e) => {
+<<<<<<< HEAD
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setError("");
     setSuccess("");
+=======
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+>>>>>>> 8fc2701 (Updated code)
   };
 
   const handleSubmit = async (e) => {
@@ -58,6 +67,7 @@ function Register() {
     setError("");
     setSuccess("");
 
+<<<<<<< HEAD
     if (!validateForm()) return;
 
     setLoading(true);
@@ -170,6 +180,31 @@ function Register() {
       <p style={{ textAlign: "center", marginTop: "15px", fontSize: "14px" }}>
         Already have an account? <Link to="/" style={{ color: "#1976d2", textDecoration: "none" }}>Login</Link>
       </p>
+=======
+    try {
+      const response = await API.post("/auth/register/", formData);
+      console.log(response.data);
+      alert("Registered Successfully");
+
+    } catch (error) {
+  console.log("FULL ERROR:", error.response);
+  console.log("DATA:", error.response?.data);
+  alert(JSON.stringify(error.response?.data));
+}
+
+  };
+
+  return (
+    <div>
+      <input name="username" placeholder="Username" onChange={handleChange} /><br/>
+      <input name="email" placeholder="Email" onChange={handleChange} /><br/>
+      <input name="password" type="password" placeholder="Password" onChange={handleChange} /><br/>
+      <input name="password_confirm" type="password" placeholder="Confirm Password" onChange={handleChange} /><br/>
+      <input name="role" placeholder="Role" onChange={handleChange} /><br/>
+      <input name="company" placeholder="Company" onChange={handleChange} /><br/>
+      <input name="phone" placeholder="Phone" onChange={handleChange} /><br/>
+      <button onClick={handleSubmit}>Register</button>
+>>>>>>> 8fc2701 (Updated code)
     </div>
   );
 }

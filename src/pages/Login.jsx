@@ -1,5 +1,6 @@
 import { useState } from "react";
 import API from "../services/api";
+<<<<<<< HEAD
 import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
@@ -30,23 +31,48 @@ function Login() {
     if (!validateForm()) return;
 
     setLoading(true);
+=======
+
+function Login() {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+>>>>>>> 8fc2701 (Updated code)
     try {
-      const res = await API.post("/login/", {
-        username,
-        password,
-      });
+      const res = await API.post("/auth/login/", formData);
 
       localStorage.setItem("token", res.data.access);
+<<<<<<< HEAD
       navigate("/profile");
     } catch (error) {
       const errorMsg = error.response?.data?.detail || error.response?.data?.message || "Login failed. Please try again.";
       setError(errorMsg);
     } finally {
       setLoading(false);
+=======
+      alert("Login Success");
+
+    } catch (error) {
+      console.log(error.response?.data);
+      alert("Invalid Credentials");
+>>>>>>> 8fc2701 (Updated code)
     }
   };
 
   return (
+<<<<<<< HEAD
     <div style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "#f5f5f5" }}>
       <div style={{ width: "300px", padding: "25px", background: "#fff", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}>
         <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Login</h2>
@@ -100,6 +126,12 @@ function Login() {
           Don't have an account? <Link to="/register" style={{ color: "#1976d2", textDecoration: "none" }}>Register</Link>
         </p>
       </div>
+=======
+    <div>
+      <input name="username" placeholder="Username" onChange={handleChange} /><br/>
+      <input name="password" type="password" placeholder="Password" onChange={handleChange} />
+      <button onClick={handleSubmit}>Login</button>
+>>>>>>> 8fc2701 (Updated code)
     </div>
   );
 }

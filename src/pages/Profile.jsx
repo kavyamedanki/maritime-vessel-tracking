@@ -1,16 +1,24 @@
+<<<<<<< HEAD
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+=======
+import { useEffect, useState } from "react";
+>>>>>>> 8fc2701 (Updated code)
 import API from "../services/api";
 
 function Profile() {
   const [user, setUser] = useState(null);
+<<<<<<< HEAD
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+=======
+>>>>>>> 8fc2701 (Updated code)
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
+<<<<<<< HEAD
         const token = localStorage.getItem("token");
         if (!token) {
           navigate("/");
@@ -26,10 +34,17 @@ function Profile() {
         }
       } finally {
         setLoading(false);
+=======
+        const response = await API.get("/auth/profile/");
+        setUser(response.data);
+      } catch (error) {
+        console.error(error.response?.data);
+>>>>>>> 8fc2701 (Updated code)
       }
     };
 
     fetchProfile();
+<<<<<<< HEAD
   }, [navigate]);
 
   const handleLogout = () => {
@@ -115,6 +130,18 @@ function Profile() {
       >
         Edit Profile
       </button>
+=======
+  }, []);
+
+  if (!user) return <div>Loading...</div>;
+
+  return (
+    <div>
+      <h2>Profile</h2>
+      <p>Username: {user.username}</p>
+      <p>Email: {user.email}</p>
+      <p>Role: {user.role}</p>
+>>>>>>> 8fc2701 (Updated code)
     </div>
   );
 }
